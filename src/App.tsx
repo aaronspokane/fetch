@@ -1,25 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { QueryClientProvider } from '@tanstack/react-query';
+
+import { AuthProvider } from './hooks/useAuth';
+import RootLayout from './pages/RootLayout';
+import HomePage from './pages/HomePage';
+import ErrorPage from './pages/ErrorPage';
+import Login from './pages/Login';
+import { queryClient } from './useAuthCheck';
+import { ProtectedRoute } from './pages/ProtectedRoute';
 import './App.css';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <RootLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      { path: '/login', element: <Login /> },
+      { 
+        path: '/', 
+        element: <ProtectedRoute><HomePage /></ProtectedRoute>                 
+      } 
+    ]
+  }
+]);
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Testing again....
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   );
 }
 
