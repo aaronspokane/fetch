@@ -1,37 +1,35 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-import classes from './Pages.module.css';
 import { authenticate } from '../util/http';
-import { useAuth } from "../hooks/useAuth";
 import { notify } from './RootLayout';
 import { useNavigate } from 'react-router-dom';
+import { setLogin } from '../util/auth';
+import { useLoaderContext } from '../hooks/useLoader';
+import classes from './Login.module.css';
 
 const Login = () => { 
 
-    const [authInfo, setAuthInfo] = useState({
-        username: "",
-        password: "",
-        valid: false
-    });    
-    
-    const { login } = useAuth()
+    const nameRef = useRef<HTMLInputElement>(null);
+    const emailRef = useRef<HTMLInputElement>(null);    
+  
     const navigate = useNavigate();
+    const { setActiveState } = useLoaderContext()
+    console.log('login rendered...');    
 
-    const hadleChange = (event: any) => {
-        setAuthInfo((prev) => {
-            return {
-                ...prev,
-                [event.target.name]: event.target.value
-            }
-        })
-    }
-
-    const handleSubmit = async (event: any) => {             
+    const handleClick = async (event: any) => {             
         event.preventDefault();
-        if(isValid()) {
-            const auth = await authenticate(authInfo);
+        setActiveState(true);
+        const name = nameRef.current?.value ?? "";
+        const email = emailRef.current?.value ?? "";        
+
+        if(isValid(name, email)) {
+            const auth = await authenticate({name, email});
             if(auth.authicated) {
-                login(true, () => navigate('/'));                
+                setLogin();                   
+                setTimeout(() => {
+                    setActiveState(false); 
+                    navigate('/');
+                }, 500);    
             } else {
                 notify(false, auth.error?.message as string);
             }
@@ -40,21 +38,25 @@ const Login = () => {
         }
     };
 
-    const isValid = () => {
+    const isValid = (name: string, email: string) => {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(authInfo.password) && authInfo.username.length > 0;
+        return re.test(email) && name.trim().length > 0;
     } 
 
     return (
-        <form className={classes.item} onSubmit={handleSubmit}>   
-            <h2>Login</h2>            
-            <input value={authInfo.username} onChange={hadleChange} name="username" width={400} />
-            <input value={authInfo.password} onChange={hadleChange} name="password" width={400} />
-                        
-            <p className={classes.formActions}>                    
-                <input type='button' value='Reset'  />  
-                <input type='submit' value="Login" />
-            </p>                
+        <form className={classes.form}>   
+            <h1>Login</h1>            
+            <p>
+                <label htmlFor="username">Name</label>
+                <input ref={nameRef} name="name" required />
+            </p>
+            <p>
+                <label htmlFor="email">Email</label>
+                <input ref={emailRef} name="email" required />
+            </p>
+            <div className={classes.actions} onClick={handleClick}>              
+                <button>Login</button>                   
+            </div>                         
         </form>
     )
 };

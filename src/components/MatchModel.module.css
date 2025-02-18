@@ -1,0 +1,45 @@
+.modal {
+    position: relative;
+    max-width: 500px; 
+    border: 0;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.5rem 0.25rem hsla(46, 96%, 42%, 0.261);
+  }
+
+  .modal::backdrop {
+    background: hsla(0, 12%, 87%, 0.5);
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;    
+    overflow-y: auto;    
+    min-height: 30vh;
+    max-height: 40vh;    
+    width: 400px;
+  }
+
+dialog header, footer {
+    padding: 2px;
+    color: var(--color-primary-800);    
+    border-radius: 0.2rem;
+    margin: 2px;
+    text-align: center;
+}
+
+footer button {
+    margin: 2px;
+}
+
+.container img {
+    width: 380px;
+    max-width: 380px;
+    height: 300px;
+    max-height: 300px;
+    margin: auto;
+    display: block;
+}
+
+.container div {
+    margin-left: 10px;
+}

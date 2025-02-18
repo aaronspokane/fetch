@@ -1,0 +1,37 @@
+.containerFilter {
+    max-width: 65rem;    
+    margin: 0.25rem auto;
+    display: flex;
+    flex-wrap: wrap;    
+    background-color: rgb(86, 83, 83); 
+    justify-content: center;  
+    border-radius: 10px;
+}
+
+.flexchild {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 65rem;    
+    margin: 0.25rem auto;
+    background-color: rgb(86, 83, 83);
+    border-radius: 10px; 
+}
+
+.flexchild > div {
+   
+    color: white;    
+    margin: 5px;
+    padding: 15px;
+    line-height: 20px;
+    font-size: 20px;    
+}
+
+.flexchild > div > label {
+  margin-right: 7px;
+}
+
+.searchFilter {
+    color: var(--color-primary-800);
+    margin: 2px;
+}
+

@@ -1,31 +1,37 @@
-import { useEffect, useState } from "react";
+import { redirect } from 'react-router-dom';
+
+import { Authenticated } from "../util/auth";
+import { useQuery } from '@tanstack/react-query';
 import { getBreeds } from '../util/http';
-import { useAuth } from "../hooks/useAuth";
+import PageContainer from '../components/PageContainer';
+import PageContent  from '../components/PageContent';
+import PageFilter from '../components/PageFilter';
+import { useMemo } from 'react';
 
 const HomePage = () => {
 
-    const [breeds, setBreeds] = useState([]);
-    const { logout } = useAuth();
+    const { data, isPending, isError, error} = useQuery({
+        queryKey: ['breeds'],
+        queryFn: getBreeds
+    });    
 
-    useEffect(() => {
-        const getDogBreeds = async () => {
-            const response = await getBreeds();   
-            if(response.authicated && !response.error) {
-                console.log(response.breeds);
-            } else {
-                logout();
-            }
-        }
-
-        getDogBreeds();
-     
-    }, [])
+    const breedData = useMemo(() => data?.data, [data?.data]);
 
     return (
-        <>
-           Home
-        </>
+        <PageContainer> 
+            <PageFilter _data={breedData} />
+            <PageContent />
+        </PageContainer> 
     )
 }
 
 export default HomePage;
+
+export const homePageLoader = async () => {
+    const authenticated = Authenticated();  
+  
+    if(!authenticated) 
+      return redirect('/login');  
+   
+    return null;
+}

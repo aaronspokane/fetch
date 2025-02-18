@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import MainNavigation from "../components/MainNavigation";
 import { ToastContainer, ToastOptions, toast } from 'react-toastify';
 
-const RootLayout = () => {
+const RootLayout = () => {    
     return (
         <>
             <ToastContainer
@@ -18,7 +18,7 @@ const RootLayout = () => {
                 theme="colored"                                       
             />
             <MainNavigation />
-            <main>
+            <main>               
                 <Outlet />
             </main>
         </>

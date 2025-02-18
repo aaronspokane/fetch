@@ -1,0 +1,28 @@
+.listItem > div {
+    margin: 10px 30px 10px 30px;  
+    font-size: 20px;    
+    padding-left: 30px;
+    line-height: 40px;     
+    display: inline-block;  
+    vertical-align: middle;    
+    width: 150px;    
+}
+
+.listItem img {
+    width: 65px;
+    height: 65px;    
+    border: solid;  
+    vertical-align: middle;
+}
+
+.listItem {
+    white-space: nowrap;    
+}
+
+.listItem button{
+    float: right; 
+    color: var(--color-primary-800); 
+    margin-right: 2px;
+}
+
+
