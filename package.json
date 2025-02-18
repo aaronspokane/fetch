@@ -1,7 +1,7 @@
 {
   "name": "fetch-react-app",
   "version": "0.1.0",
-  "homepage": "https://aaronspokane.github.io",
+  "homepage": "https://aaronspokane.github.io/fetch",
   "private": true,
   "dependencies": {
     "@achmadk/react-loading-overlay": "^3.0.5",
