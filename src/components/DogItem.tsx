@@ -13,8 +13,8 @@ const DogItem = ({dog}: any) => {
         <li className={classes.listItem}>
             <img src={dog.img} alt={dog.name} />
             <div>Name: {dog.name}</div> 
-            <div>age: {dog.age}</div> 
-            <div>breed: {dog.breed}</div> 
+            <div>Age: {dog.age}</div> 
+            <div>Beed: {dog.breed}</div> 
             <div><button onClick={() => handleClick('remove', dog.id)}>Remove</button><button onClick={() => handleClick('add', dog.id)}>Add</button></div>           
         </li>
     )
