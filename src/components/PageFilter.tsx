@@ -63,6 +63,8 @@ const PageFilter = ({ _data }: pageContainer) =>{
         setActiveState(true);
         let dogs;
 
+        clearMatches();
+
         const data = await queryClient.fetchQuery({
             queryKey: ["fetchIds"],
             queryFn: () => getIds(filter)
