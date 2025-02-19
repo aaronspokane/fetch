@@ -12,14 +12,12 @@ const MainNavigation = () => {
     const handleClick = async (event: React.MouseEvent<HTMLAnchorElement>) => {
         event.preventDefault();       
         const auth = await logoutUser();   
-        if(auth.error) {
+
+        if(auth.error) 
             notify(false, auth.error.message);
-        } 
-        else
-        {
+      
             logOutUser();
-            navigate('/login');
-        }    
+            navigate('/login');          
     };
 
     return (
