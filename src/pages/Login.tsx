@@ -35,6 +35,7 @@ const Login = () => {
             }
         } else {
             notify(false, "Name or password is invalid!");
+            setActiveState(false);
         }
     };
 

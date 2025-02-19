@@ -25,6 +25,11 @@ const router = createBrowserRouter([
         path: '/', 
         element: <HomePage />,  
         loader: homePageLoader
+      },
+      { 
+        path: '/fetch', 
+        element: <HomePage />,  
+        loader: homePageLoader
       } 
     ]
   }
